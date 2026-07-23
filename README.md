@@ -1,51 +1,91 @@
-# 🚦 TrafficVision AI: Smart Congestion Management System
+# 🚦 Smart Traffic Prediction & Congestion Management System
 
-TrafficVision AI is a full-stack, machine-learning-powered platform designed to monitor, analyze, and predict urban traffic congestion in real-time. By combining a modern React frontend with a high-performance Python FastAPI backend, it processes live telemetry and utilizes a trained Random Forest model to forecast traffic density and flow velocity.
+The **Smart Traffic Prediction & Congestion Management System** is a full-stack, intelligent application designed to monitor, analyze, and forecast traffic patterns in real-time. It integrates a high-performance Python FastAPI backend—powered by machine learning models—with a modern Next.js and Tailwind CSS web dashboard providing comprehensive multi-view traffic management capabilities.
+
+---
 
 ## 🚀 Tech Stack
 
-* **Frontend:** React, Next.js, Tailwind CSS, Lucide Icons
-* **Backend:** Python, FastAPI, Uvicorn
-* **Database:** PostgreSQL, SQLAlchemy (ORM)
-* **Machine Learning:** Scikit-Learn (Random Forest Regressor), Pandas, Joblib
-* **Data Source:** Historical Kaggle Urban Traffic Dataset
+### **Frontend**
 
-## ✨ Core Features (Milestones 1 & 2)
+* **Framework:** Next.js (React / TypeScript)
+* **Styling:** Tailwind CSS
+* **UI Components & Icons:** Custom modular dashboard components, Lucide Icons, and Victory charts.
 
-* **Live Traffic Monitoring Dashboard:** Real-time monitoring of road utilization, vehicle counts, and average speeds across multiple city junctions.
-* **AI Forecasting Engine:** A fully integrated ML pipeline that predicts future vehicle density and calculates expected congestion levels based on target vectors and timeframes.
-* **Role-Based Access Control (RBAC):** UI dynamically adapts based on user roles (`ADMIN`, `OPERATOR`, `COMMUTER`) to restrict sensitive forecasting tools and system controls.
-* **Persistent Data Storage:** Live traffic metrics and historical AI predictions are securely stored and queried using a local PostgreSQL database.
+### **Backend**
 
-## 🛠️ Local Development Setup
+* **Framework:** FastAPI (Python)
+* **Server:** Uvicorn
+* **Data Processing & ML:** Scikit-learn, Pandas, NumPy, Joblib (Random Forest models, feature/label encoders)
 
-Follow these steps to get the project running on your local machine.
+---
 
-### Prerequisites
-* Node.js (v18+)
-* Python (3.10+)
-* PostgreSQL (Running on port 5432)
+## 📂 Project Structure
 
-### 1. Database Configuration
-1. Open your terminal and access PostgreSQL: `psql postgres`
-2. Create the database: `CREATE DATABASE trafficvision_db;`
-3. Exit PostgreSQL: `\q`
+```text
+smart-traffic-prediction-congestion-management-system/
+├── backend/
+│   ├── app/                 # FastAPI application routes, schemas, and core logic
+│   ├── data/                # Dataset files and data generation scripts
+│   ├── venv/                # Python virtual environment
+│   ├── requirements.txt     # Python dependencies
+│   ├── train_model.py       # ML model training script
+│   ├── prepare_ml_dataset.py# Dataset preparation scripts
+│   ├── traffic_rf_model.pkl # Trained Random Forest traffic model
+│   ├── feature_encoders.pkl # Feature encoding artifacts
+│   └── label_encoder.pkl    # Label encoding artifacts
+│
+├── frontend/
+│   ├── public/              # Static assets, icons, and svgs
+│   ├── src/
+│   │   ├── app/             # Next.js App Router (pages, login, layouts, globals)
+│   │   │   └── components/  # Modular views & training manual assets
+│   │   └── ...
+│   ├── package.json         # Node.js dependencies
+│   └── tsconfig.json        # TypeScript configuration
+│
+└── .gitignore               # Excludes node_modules, venv, .next, and build artifacts
 
-### 2. Backend & AI Setup
-Open a terminal and navigate to the `backend` directory:
+```
+
+---
+
+## ✨ Core Features & Functional Views
+
+* **Live Traffic Monitoring Dashboard (`TrafficMonitoringView` & `DashboardView`):** Real-time monitoring of city junctions, road utilization metrics, vehicle counts, and average speeds.
+* **Interactive Live Map (`LiveMapView`):** Visual geographical layout tracking live congestion points and vehicle telemetry.
+* **AI Forecasting Engine (`ForecastingView`):** Integrated machine learning pipeline utilizing trained Random Forest regressors to predict future vehicle density and congestion levels.
+* **Analytics & Reports (`AnalyticsView` & `ReportsView`):** Comprehensive deep-dives into historical traffic data, trend graphs, performance metrics, and downloadable reporting tools.
+* **Road Management (`RoadManagementView`):** Administrative tools for managing road networks, speed limits, and signal states.
+* **User Authentication & Profile (`ProfileView` & Login):** Secure user sessions, authentication state management, and personalized user profiles.
+* **Training Resources Integration:** Embedded technical manuals (e.g., PLC Training Manual) directly accessible within the system interface.
+
+---
+
+## ⚙️ Getting Started & Local Setup
+
+### **1. Backend Setup**
+
+Open a terminal, navigate to the backend directory, activate your virtual environment, and start the API server:
+
 ```bash
 cd backend
-
-# Create and activate a virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
 
-# Install dependencies
-pip install fastapi uvicorn sqlalchemy psycopg2-binary pandas scikit-learn joblib
+```
 
-# IMPORTANT: Download the Kaggle traffic dataset and place it in backend/data/traffic.csv
-# Train the AI model (Generates traffic_model.pkl)
-python train_model.py
+### **2. Frontend Setup**
 
-# Start the API Server
-python app/main.py
+Open a separate terminal window, navigate to the frontend directory, install dependencies, and start the development server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your web browser to access the dashboard interface.
